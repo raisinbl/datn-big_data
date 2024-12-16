@@ -1,0 +1,3 @@
+include:
+  - project: 'data-warehouse/ci'
+    file: '/java8.yml'

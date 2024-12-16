@@ -1,0 +1,25 @@
+drop table if exists chi_tiet;
+create table if not exists chi_tiet (
+    MA_PHIEUGUI varchar,
+    TINH_NHAN varchar,
+    HUYEN_NHAN varchar,
+    TEN_HUYEN_NHAN varchar,
+    TINH_PHAT varchar,
+    HUYEN_PHAT varchar,
+    TEN_HUYEN_PHAT varchar,
+    MA_BUUCUC_GOC varchar,
+    TIME_TAC_DONG bigint,
+    TRANG_THAI bigint,
+    MA_BUUCUC_HT varchar,
+    CHI_NHANH_HT varchar,
+    MA_BUUCUC_PHAT varchar,
+    NGAY_GUI_BP bigint,
+    TIEN_COD bigint,
+    NGAY_NHAP_MAY bigint,
+    TIEN_CUOC bigint,
+    LOAI_HH varchar,
+    TRONG_LUONG bigint,
+    VERSION bigint,
+    UPDATED_AT bigint,
+    CONSTRAINT pk_chi_tiet PRIMARY KEY (MA_PHIEUGUI, MA_BUUCUC_HT, CHI_NHANH_HT)
+);
