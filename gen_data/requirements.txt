@@ -1,0 +1,4 @@
+pandas
+hdfs
+psycopg2
+sqlalchemy
