@@ -30,21 +30,33 @@ init_jvm()
 conn = jpype.dbapi2.connect(dsn="jdbc:phoenix:localhost", driver="org.apache.phoenix.jdbc.PhoenixDriver")
 # SQL query
 query_chiTiet = """
-  SELECT chi_tiet.*
-  FROM chi_tiet, chiso_version
-  WHERE chi_tiet.version = (
-    SELECT MAX(version) FROM chiso_version
+  SELECT CHI_TIET.*
+  FROM CHI_TIET, CHISO_VERSION
+  WHERE CHI_TIET.VERSION = (
+    SELECT MAX(VERSION) FROM CHISO_VERSION
   )
 """
 query_tongHop = """
-  SELECT tong_hop.*
-  FROM tong_hop, chiso_version
-  WHERE tong_hop.version = (
-    SELECT MAX(version) FROM chiso_version
+  SELECT TONG_HOP.*
+  FROM TONG_HOP, CHISO_VERSION
+  WHERE TONG_HOP.VERSION = (
+    SELECT MAX(VERSION) FROM CHISO_VERSION
   )
 """
+query_updatedAt = """
+  SELECT UPDATED_AT
+  FROM CHISO_VERSION
+    , (SELECT MAX(VERSION) AS VERSION FROM CHISO_VERSION) AS MAX_VERSION
+  WHERE CHISO_VERSION.VERSION = MAX_VERSION.VERSION
+"""
+updated_at_df = pd.read_sql(query_updatedAt, conn)
+updated_at = updated_at_df['UPDATED_AT'][0]
+updated_at = datetime.datetime.fromtimestamp(updated_at/1000).strftime("%Y-%m-%d %H:%M:%S")
+
 # Streamlit App
 st.title("Tổng Hợp Tồn")
+# Get the update time
+st.write(f"Updated at: {updated_at}")
 # Search bar
 search_query = st.text_input("Tìm kiếm", "")
 # Execute the query and create a DataFrame
