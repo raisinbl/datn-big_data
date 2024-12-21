@@ -1,0 +1,25 @@
+# docker compose to set up postgres with this configuration
+# POSTGRES.USER: "postgres"
+# POSTGRES.PASSWD: "123456"
+
+version: "3.1"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/.tmp/postgres/data:/var/lib/postgresql/data
+      - ./postgres/sql/init-sql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
