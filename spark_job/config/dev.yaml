@@ -2,18 +2,18 @@ SPARK_MASTER : "local[*]"
 
 PHOENIX.URL: "jdbc:phoenix:localhost"
 
-HDFS_URL.MAPPINGCN: 'hdfs://localhost:9000/data/BI/MAPPING/mapping_cn.csv'
+HDFS_URL.MAPPINGCN: 'hdfs://localhost:9000/data/mapping_cn.csv'
 # Hành trình
-HDFS_URL.HANHTRINH_ALL: 'hdfs://localhost:9000/HIVE/HANH_TRINH'
+HDFS_URL.HANHTRINH_ALL: 'hdfs://localhost:9000/data/HANH_TRINH'
 NUM_DAYS_HANHTRINH_ALL_CACHE: 60
 NUM_DAYS_HANHTRINH_ALL_N: 3
 # Phiếu gửi
-HDFS_URL.PHIEU_GUI: 'hdfs://localhost:9000/HIVE/PHIEU_GUI'
+HDFS_URL.PHIEU_GUI: 'hdfs://localhost:9000/data/PHIEU_GUI'
 NUM_DAYS_PHIEU_GUI_CACHE: 80
 NUM_DAYS_PHIEU_GUI_N: 15
 # Cache
-CACHE_TON_CHUA_PCP_THONG_TIN: 'hdfs://localhost:9000/cache/CACHE_TON/THONG_TIN_DON'
-CACHE_TON_CHUA_PCP_TRANG_THAI: 'hdfs://localhost:9000/cache/CACHE_TON/TRANG_THAI_DON'
+CACHE_TON_CHUA_PCP_THONG_TIN: 'hdfs://localhost:9000/cache/THONG_TIN'
+CACHE_TON_CHUA_PCP_TRANG_THAI: 'hdfs://localhost:9000/cache/TRANG_THAI'
 # set ngày giờ chạy & mode chạy lại cache
 TIME_CHECK_START: 23
 TIME_CHECK_END: 24

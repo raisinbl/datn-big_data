@@ -38,8 +38,12 @@ public class DataLoader {
                 config.getConfigInt("NUM_DAYS_HANHTRINH_ALL_N")));
         String path_cache_trangthai = dtUtils.getUrlLatestDayCache(config.getConfig("CACHE_TON_CHUA_PCP_TRANG_THAI"));
         String path_cache_thongtin = dtUtils.getUrlLatestDayCache(config.getConfig("CACHE_TON_CHUA_PCP_THONG_TIN"));
-        CACHE_THONG_TIN = spark.read().parquet(path_cache_thongtin);
-        CACHE_TRANG_THAI = spark.read().parquet(path_cache_trangthai);
+        try {
+            CACHE_THONG_TIN = spark.read().parquet(path_cache_thongtin);
+            CACHE_TRANG_THAI = spark.read().parquet(path_cache_trangthai);
+        }catch (Exception e){
+            System.out.println("don't read folder");
+        }
     }
 
     public Dataset<Row> getCACHE_THONG_TIN() {
