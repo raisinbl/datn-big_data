@@ -1,15 +1,19 @@
 # File: Makefile
 
 # Phony targets (không liên kết với file cụ thể)
-.PHONY: postgres airflow
+.PHONY: postgres airflow nifi
 
-# Target: postgres
 postgres:
 	docker compose -f postgres-docker-compose.yaml up -d
 
-# Target: airflow
 airflow:
 	docker compose -f postgres-docker-compose.yaml -f airflow-docker-compose.yaml up -d
 
-down:
-	docker compose -f postgres-docker-compose.yaml -f airflow-docker-compose.yaml down -v --remove-orphans
+nifi:
+	docker compose -f nifi-docker-compose.yaml up -d
+
+down_postgres:
+	docker compose -f postgres-docker-compose.yaml down -v --remove-orphans
+
+down_airflow:
+	docker compose -f airflow-docker-compose.yaml -f postgres-docker-compose.yaml down -v --remove-orphans

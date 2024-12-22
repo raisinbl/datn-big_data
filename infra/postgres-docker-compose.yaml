@@ -1,9 +1,6 @@
 # docker compose to set up postgres with this configuration
 # POSTGRES.USER: "postgres"
 # POSTGRES.PASSWD: "123456"
-
-version: "3.1"
-
 services:
   postgres:
     container_name: postgres
@@ -23,3 +20,8 @@ services:
       retries: 5
       start_period: 5s
     restart: always
+    networks:
+      - bigdata
+
+networks:
+  bigdata:

@@ -1,0 +1,23 @@
+# version: '3'
+services:
+  nifi:
+    container_name: nifi 
+    # env_file:
+    #   - ./.proxy_env
+    environment:
+      - NIFI_WEB_HTTP_PORT=8080
+      # - NIFI_WEB_HTTPS_PORT=8443
+    build:
+      dockerfile: nifi/Dockerfile
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      # - 8443:8443
+      - 9091:8080
+    networks:
+      - bigdata
+
+networks:
+  bigdata:

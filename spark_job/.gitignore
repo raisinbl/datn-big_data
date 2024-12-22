@@ -46,3 +46,5 @@ bin/
 
 tmp
 .ropeproject
+metastore_db
+derby.log
