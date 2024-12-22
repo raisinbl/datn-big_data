@@ -12,8 +12,11 @@ airflow:
 nifi:
 	docker compose -f nifi-docker-compose.yaml up -d
 
-down_postgres:
-	docker compose -f postgres-docker-compose.yaml down -v --remove-orphans
+down-postgres:
+	docker compose -f postgres-docker-compose.yaml down -v
 
-down_airflow:
-	docker compose -f airflow-docker-compose.yaml -f postgres-docker-compose.yaml down -v --remove-orphans
+down-airflow:
+	docker compose -f airflow-docker-compose.yaml -f postgres-docker-compose.yaml down -v
+
+down-nifi:
+	docker compose -f nifi-docker-compose.yaml down -v
