@@ -57,15 +57,24 @@ updated_at = datetime.datetime.fromtimestamp(updated_at/1000).strftime("%Y-%m-%d
 st.title("Tổng Hợp Tồn")
 # Get the update time
 st.write(f"Updated at: {updated_at}")
-# Search bar
-search_query = st.text_input("Tìm kiếm", "")
 # Execute the query and create a DataFrame
 tongHop = pd.read_sql(query_tongHop, conn)
-# Filter data based on search query
-if search_query:
-    filtered_df = tongHop[tongHop.apply(lambda row: row.astype(str).str.contains(search_query, case=False).any(), axis=1)]
-else:
+# tạo bộ lọc chi nhánh và bưu cục
+col1, col2 = st.columns(2)
+with col1:
+  branch_filter = st.selectbox("Chọn chi nhánh", tongHop['CHI_NHANH_HT'].unique()
+                               , index=None, placeholder="Chọn chi nhánh")
+  if branch_filter:
+    filtered_df = tongHop[tongHop['CHI_NHANH_HT'] == branch_filter]
+  else:
     filtered_df = tongHop
+with col2:
+  if branch_filter:
+    post_office_filter = st.selectbox("Chọn bưu cục", tongHop[tongHop['CHI_NHANH_HT'] == branch_filter]['MA_BUUCUC_HT'].unique()
+                                      , index=None, placeholder="Chọn bưu cục")
+    if post_office_filter:
+      filtered_df = filtered_df[filtered_df['MA_BUUCUC_HT'] == post_office_filter]
+
 # Display the table
 st.dataframe(filtered_df)
 # Export to Excel button
